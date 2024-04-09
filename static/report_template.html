@@ -4,11 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Aquatone Report">
+  <meta name="description" content="SolidLab VMS OSINT Report">
   <meta name="author" content="Michael Henriksen (https://twiter.com/michenriksen)">
-  <meta name="generator" content="Aquatone v{{.Version}}">
+  <meta name="generator" content="SolidLab VMS">
   <meta name="robots" content="noindex, nofollow">
-  <title>Aquatone Report</title>
+  <title>SolidLab VMS OSINT Report</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/visjs-network@4.24.7/dist/vis.min.css"
@@ -148,7 +148,7 @@
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">AQUATONE</a>
+    <a class="navbar-brand" href="#">SolidLab VMS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
       aria-controls="#navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -159,16 +159,16 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            Pages
+            Сортировка
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="#/pages/by-similarity">By Similarity</a>
-            <a class="dropdown-item" href="#/pages/by-hosts">By Hosts</a>
-            <a class="dropdown-item" href="#/pages/single">Single Pages</a>
+            <a class="dropdown-item" href="#/pages/by-similarity">По схожим признакам</a>
+            <a class="dropdown-item" href="#/pages/by-hosts">По хостам</a>
+            <a class="dropdown-item" href="#/pages/single">По одному</a>
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#/pages/graph">Graph</a>
+          <a class="nav-link" href="#/pages/graph">Карта</a>
         </li>
       </ul>
     </div>
@@ -179,7 +179,7 @@
   </main>
 
   <footer id="footer">
-    <p class="text-muted">AQUATONE v{{.Version}} &middot; made with <span
+    <p class="text-muted">SolidLab VMS &middot; made with <span
         style="color:red;font-weight:bold">&#65533;</span> by <a href="https://michenriksen.com" target="_blank">Michael
         Henriksen</a></p>
     <p><a href="https://www.buymeacoffee.com/michenriksen" target="_blank"><img
@@ -257,7 +257,7 @@
         </p>
       </div>
       <div class="card-footer">
-        <a href="#" class="btn btn-outline-primary btn-sm card-link" v-on:click="openDetailsModal">View Details</a> <a class="btn btn-outline-secondary btn-sm card-link float-right" :href="page.url" target="_blank">Visit Page</a>
+        <a href="#" class="btn btn-outline-primary btn-sm card-link" v-on:click="openDetailsModal">Детали</a> <a class="btn btn-outline-secondary btn-sm card-link float-right" :href="page.url" target="_blank">Посетить страницу</a>
       </div>
     </div>
   </script>
@@ -292,7 +292,7 @@
 
   <script type="text/x-template" id="pagesBySimilarityPageTemplate">
     <div>
-      <h2 class="display-4 text-center border-bottom pb-3">Pages by Similarity</h2>
+      <h2 class="display-4 text-center border-bottom pb-3">Сортировка по схожим признакам</h2>
       <div v-if="clusterIndex - 1 < pageSimilarityClusters.length" v-for="clusterIndex in clustersToShow">
         <page-carousel v-bind:id="pageSimilarityClusters[clusterIndex - 1].uuid" v-bind:pages="pageSimilarityClusters[clusterIndex - 1].pages"
           v-bind:key="pageSimilarityClusters[clusterIndex - 1].uuid">
@@ -304,7 +304,7 @@
 
   <script type="text/x-template" id="pagesByHostsPageTemplate">
     <div>
-      <h2 class="display-4 text-center border-bottom pb-3">Pages by Hosts</h2>
+      <h2 class="display-4 text-center border-bottom pb-3">Сортировка по хостам</h2>
       <div v-if="clusterIndex - 1 < pagesByHosts.length" v-for="clusterIndex in clustersToShow">
         <page-carousel v-bind:id="pagesByHosts[clusterIndex - 1].id" v-bind:pages="pagesByHosts[clusterIndex - 1].pages"
           v-bind:key="pagesByHosts[clusterIndex - 1].id">
@@ -316,7 +316,7 @@
 
   <script type="text/x-template" id="singlePagesPageTemplate">
     <div>
-      <h2 class="display-4 text-center border-bottom pb-3">Pages</h2>
+      <h2 class="display-4 text-center border-bottom pb-3">По одному</h2>
       <div v-if="pageIndex - 1 < pages.length" v-for="pageIndex in pagesToShow">
         <single-page v-bind:id="pages[pageIndex - 1].uuid" v-bind:page="pages[pageIndex - 1]" v-bind:key="pages[pageIndex - 1].uuid"></single-page>
       </div>
@@ -728,14 +728,14 @@
           </button>
         </div>
         <div class="modal-body">
-          <h3>Response Headers:</h3>
+          <h3>Заголовки ответа:</h3>
           <table class="page-headers-table"></table>
         </div>
         <div class="modal-footer">
-          <a href="" target="_blank" class="btn btn-primary visit-page-button">Visit Page</a>
-          <a href="" target="_blank" class="btn btn-primary view-raw-headers-button">View Raw Headers</a>
-          <a href="" target="_blank" class="btn btn-primary view-raw-response-button">View Raw Response</a>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <a href="" target="_blank" class="btn btn-primary visit-page-button">Посетить страницу</a>
+          <a href="" target="_blank" class="btn btn-primary view-raw-headers-button">Посмотреть Raw Headers</a>
+          <a href="" target="_blank" class="btn btn-primary view-raw-response-button">Посмотреть Raw Response</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
         </div>
       </div>
     </div>
